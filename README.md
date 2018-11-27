@@ -27,17 +27,19 @@ Using the API-:
 ## Set up-:
 ### 1) download the repo
 ### 2) Install required dependencies
-### 3) Downloading ngrok is recommended (it helps to use your api with https link (Works for debugging purposes))
-### 4) startup the ngrok hosting by entering the following ( make sure to navigate to where ngrok.exe shell is located before you enter the command)
+### 3) Downloading ngrok is recommended (it helps to use your api with https link (helps with a lot of things))
+### 4) Fire up ngrok by entering the following ( make sure to navigate to where ngrok.exe shell is located before you enter the command)
 ```
 ngrok.exe http 80
 ```
 Now you would be getting a https link keep it noted
+
 Now open the server folder and run
 ```
 python app.py
 ```
 on your command prompt (your API should be online) you can access you API at the link which you have copied when you ran ngrok server
+
 ### 2) Train some faces-:
 - Before we can checkout the features of the API we need to train it with more than one member,
 - I have written the code such that the server takes in only pickle files for training the faces, So for that purposes you can navigate to training folder there I have given you instruction (written code on how to create a dataset and convert it into a pickle file which you can upload )
@@ -113,3 +115,5 @@ If you want to see an example of an API, using this template you can checkout my
 To enable email sending features you need to fill in your credentials , open app.py file
 and from line 41 to 46 you need to fill in the information (required to send email), We are using smtp (which is not the bets way to send email , instead you could use Gmail API)
 so, in most of the cases it wont work with your email(which you use on daily basis, so create a new Gmail account)
+
+## Any Questions/issues/suggestions Please feel free to DM me [Twitter](https://twitter.com/sk_13579)
