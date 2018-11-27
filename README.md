@@ -8,9 +8,9 @@ So, I have built a flask API out facial recognition model I have built , Which h
 1) Face authentication-: You can use the API For face authentication
 
 2) Intruder alert -: You can get an alert,
-a) if there is anyone which your system does not recognize
-b) Anyone which it recognizes but he/she is not suppose be there
-c) You can also set time limits , one which person should be there at what time , if the person is found by your system other then the time allotted it will again send you a alert
+- a) if there is anyone which your system does not recognize
+- b) Anyone which it recognizes but he/she is not suppose be there
+- c) You can also set time limits , one which person should be there at what time , if the person is found by your system other then the time allotted it will again send you a alert
 *Alert in this case is through an email*
 
 3) Every time a person is found by your system (may or may not be an intruder the data of when they are found, who are they will be logged in the database)
@@ -27,9 +27,8 @@ Using the API-:
 ## Set up-:
 ### 1) download the repo
 ### 2) Install required dependencies
-### 3) Fill in the required information in the config file( If you find it necessary)
-### 4) Downloading ngrok is recommended (it helps to use your api with https link (Works for debugging purposes))
-### 5) startup the ngrok hosting by entering the following ( make sure to navigate to where ngrok.exe shell is located before you enter the command)
+### 3) Downloading ngrok is recommended (it helps to use your api with https link (Works for debugging purposes))
+### 4) startup the ngrok hosting by entering the following ( make sure to navigate to where ngrok.exe shell is located before you enter the command)
 ```
 ngrok.exe http 80
 ```
@@ -38,20 +37,21 @@ Now open the server folder and run
 ```
 python app.py
 ```
-on your command prompt (your api should be online) you can access you API at the link which you have copied when you ran ngrok server
+on your command prompt (your API should be online) you can access you API at the link which you have copied when you ran ngrok server
 ### 2) Train some faces-:
-- Before we can checkout the features of the api we need to train it with more than one member,
-- I have written the code such that the server takes in only pickle files for training the faces, So for that purposes you can navigate to training folder there i have given you instruction (written code on how to create a dataset and convert it into a pickle file which you can upload )
+- Before we can checkout the features of the API we need to train it with more than one member,
+- I have written the code such that the server takes in only pickle files for training the faces, So for that purposes you can navigate to training folder there I have given you instruction (written code on how to create a dataset and convert it into a pickle file which you can upload )
 - Now you need to upload that pickle file at the train end point(/train) for example
   https://50d66cff.ngrok.io -> this is your ngrok link then go to  https://50d66cff.ngrok.io/train and upload the file ( if everything is right then it should trine you model)
 
 ### 3) Using curl request's for testing
+Replace the link with one you have copied earlier
 
-- You can send the image to the server by
+- You can send the image to the server by, make sure there is an image named test.jpg in your current directory
 ```
 curl -F "file=@test.jpg" https://a1ca3ed2.ngrok.io/ec/curl/test
 ```
-where test.jpg would be the name of the file you are sending to the server for testing ( in return you would be getting the name,validity) we use this format for a reason
+where test.jpg would be the name of the file you are sending to the server for testing ( in return you would be getting the name, validity) we use this format for a reason
 
 - You can view the logs by
 ```
@@ -64,7 +64,7 @@ curl   https://a1ca3ed2.ngrok.io/checkPerson/<name>
 ```
 name of the person in those angular brackets of whom you have trained
 
-- You can make the Peron intruder by
+- You can make the Person intruder by
 ```
 curl   https://a1ca3ed2.ngrok.io/makeIntruder/<name>
 ```
@@ -111,5 +111,5 @@ If you want to see an example of an API, using this template you can checkout my
 
 ## Note-:
 To enable email sending features you need to fill in your credentials , open app.py file
-and from line 41 to 46 you need to fill in the information (required to send email), We are using smtp (which is not the bets way to send email , instead you could use Gmail api)
-so, in most of the cases it wont work with your email(which you use on daily basis, so create a new gmail account)
+and from line 41 to 46 you need to fill in the information (required to send email), We are using smtp (which is not the bets way to send email , instead you could use Gmail API)
+so, in most of the cases it wont work with your email(which you use on daily basis, so create a new Gmail account)
