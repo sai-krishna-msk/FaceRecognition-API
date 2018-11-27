@@ -1,4 +1,4 @@
-I have made an API out of a face recognition model, that I have built( you can check about that here [link to fc](Put the link here))
+I have made an API out of a face recognition model, that I have built( you can check about that here [link to fc](https://github.com/sai-krishna-msk/FaceRecognition))
 
 Solving a problem through ml or dl does not complete by building a good model( finding the solution to the problem is of no use if it can't serve the people who have the problem in the first place)
 Scaling our model such that it reaches maximum number of people is an important part of solution to the problem, and by maximum number of people I mean multiple platforms such as (android , web etc..) and API are the best way to do it.
