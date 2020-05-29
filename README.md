@@ -1,9 +1,26 @@
-I have built an API out of a face recognition model, that I have built( you can check about that here [Click](https://github.com/sai-krishna-msk/FaceRecognition))
+# Contents
 
-Solving a problem through ml or dl does not complete by building a good model( finding the solution to the problem is of no use if it can't serve the people who have the problem in the first place)
-Scaling our model such that it reaches maximum number of people is an important part of solution to the problem, and by maximum number of people I mean on multiple platforms such as (android,web etc..) and API are the best way(Easy) to do it.
+- **Introduction**
 
-So, I have built a flask API of facial recognition model I have built , Which has the following features
+- **Features**
+
+- **Using the code**
+
+# Introduction
+
+
+
+Building a Machine Learning or Deep Learning Model in and on itself does not serve a purpose unless a system serves the model(pun intended)
+
+Making the model accessible a key component of problem as the following is the project fulfilling it  
+
+
+
+# Features
+
+I wrapped the facial Recognition model trained into a Web API using Flask, If you want to see/use only the Face Recognition part you can find it [Here](https://github.com/sai-krishna-msk/FaceRecognition)
+
+equipped with the following features 
 
 1) Face authentication-: You can use the API For face authentication
 
@@ -14,102 +31,97 @@ So, I have built a flask API of facial recognition model I have built , Which ha
 - c) You can also set time limits , one which person should be there at what time , if the person is found by your system other then the time allotted it will again send you a alert
   *Alert in this case is through an email*
 
-3) Every time a person is found by your system (may or may not be an intruder the data of when they are found, who are they will be logged in the database)
+3) Every time a person is found by the system (may or may not be an intruder the data of when they are found, who are they will be logged in the database)
 
 4) You can get a csv file of that logged information( for further analysis(IF you know what I mean :) )
 
-5) and most importantly you can train new people dynamically
+5) Most importantly you can train new people online without taking down the system
 
-Note-:
-You can send photos through android through base64 encoding ( For which I have provided a main activity file )
-You can send images through curl, ( for which scripts are provided)
-
-Using the API-:
-
-## Set up
-
-### 1) download the repo
+**Images can be sent through Android making use of base64 encoding ( For which I have provided a main activity file )
+You can send images through curl, ( for which scripts are provided)**
 
 
 
-### 2) Install required dependencies
+# Using the Code
 
+1) **Download the repo**
 
+2) **Install required dependencies**
 
-### 3) Downloading ngrok is recommended (it gives you a temporary access to your service with a https)
-
-
-
-### 4) Fire up ngrok by entering the following ( make sure to navigate to where ngrok.exe shell is located before you enter the command)
-
+```bash
+pip install -r requirements.txt
 ```
+
+3) **Downloading ngrok is recommended (it gives you a temporary access to your service with a https)**
+
+4) **Fire up ngrok by entering the following ( make sure to navigate to where ngrok.exe shell is located before you enter the command)**
+
+```bash
 ngrok.exe http 80
 ```
 
-Now you would be getting a https link keep it noted
+- You can notice a https url note it down
 
-Now open the server folder and run
+5) Open the server folder and run
 
-```
+```bash
 python app.py
 ```
 
-on your command prompt (your API should be online) you can access you API at the link which you have copied when you ran ngrok server
+on your command prompt (your API should be online) you can access you API at the link which has been noted above
 
-### 2) Training Faces-:
+###  Training Faces
 
-- Before we can checkout the features of the API we need to train it with more than one member,
-- I have written the code such that the server takes in only pickle files(compressed file format) for training the faces, so for that should navigate to *training* folder there I have listed instruction's (written code on how to create a dataset and convert it into a pickle file which you can upload )
+- Before we go through other features of the API we need to train it with more than one individual
+
+- System Accepts training images in pickled format for which you have to navigate to [training directory](https://github.com/sai-krishna-msk/FaceRecognition-API/tree/master/training), necessary information to create dataset has been provided in that directory 
+
 - Now you need to upload that pickle file at the train end point(/train) for example
   https://50d66cff.ngrok.io -> this is your ngrok link then go to  https://50d66cff.ngrok.io/train and upload the file ( if everything is right then it should train your model)
 
-### 3) Using curl request's for testing
+### Using curl request's for testing
 
-Replace the link with one you have copied earlier
-
-- You can send the image to the server by doing following(make sure there is an image named test.jpg in your current directory)
+You can send the image to the server by doing following(make sure there is an image named test.jpg in your current working directory )
 
 ```
 curl -F "file=@test.jpg" https://a1ca3ed2.ngrok.io/ec/curl/test
 ```
 
-where test.jpg would be the name of the file you are sending to the server for testing (in return you would be getting the name, validity) we use this format for a reason
+where test.jpg would be the name of the image being sent to the server for testing (in return you would be getting the name, validity)
 
-- You can view the logs by entering
+- Logs can be accessed using the following url
 
-```
+```bash
 curl   https://a1ca3ed2.ngrok.io/showLogs
 ```
 
-- You can see weather the person is set as an intruder or not by
+- To verify weather the person is set as an intruder or not can be done using 
 
-```
+```bash
 curl   https://a1ca3ed2.ngrok.io/checkPerson/<name>
 ```
 
-Name of the person in those angular brackets of whom you have trained
+- To make an individual as intruder 
 
-- You can make the Person intruder by
-
-```
+```bash
 curl   https://a1ca3ed2.ngrok.io/makeIntruder/<name>
 ```
 
-- You can reset a person by(from intruder to a valid person)
+- To set a person who is an intruder to authorized individual
 
-```
+```bash
 curl   https://a1ca3ed2.ngrok.io/resetPerson/<name>
 ```
 
 - To get the entire logs in form of a csv file to your email
 
-```
+```bash
 curl   https://a1ca3ed2.ngrok.io/resetPerson/csv
 ```
 
-- If you wish to change the validation time of a person
+- If you wish to change time [training](https://github.com/sai-krishna-msk/FaceRecognition-API/tree/master/training) between which an individual should be considered authorized  
 
-```
+```bash
 curl   https://a1ca3ed2.ngrok.io/resetPerson/<time>
 ```
 
@@ -117,33 +129,25 @@ where time should be formatted as such
 time -:
 <name>,<initialHour>,<intialMinute>,<finalHour>,<finalMinute>
 
-### Through android:
+## Making use of API through Android devices
 
-In android I have provided the code necessary for you to open the front camera, take a photo and send it to the server,
+In [android](https://github.com/sai-krishna-msk/FaceRecognition-API/tree/master/android) directory necessary code is provided for you to open the front camera, take a photo and send it to the server,
 The only thing you need to do is changing the link of where it has to send, regarding which I have provided information in the respective repo (for executing through android )
 
-### Accessing through Web:
+## Accessing through Web:
 
-- Don't forget to have an image named "test.jpg" in the folder while you are testing
+- While testing this feature make sure you have file named test.jpg in the current directory
 
 ### Flask(Web/python)
 
-Well there are a couple of options here you can be using flask as the backend in which case it does not make sense to send a  request to another API , because your model is written anyway in python you could instead plugin your model directly to your backend
-
-But anyways, I have e given code which you could use in between you backend code to access the API
+To make use of this API in your own Flask app, Navigate to [Flask Directory](https://github.com/sai-krishna-msk/FaceRecognition-API/tree/master/Web/Flask) where necessary instructions have been provided 
 
 ### Node( Web/Node)
 
-I have provided code which help you  plug the model in your backend code giving you a way to access the API
-
-If you want to see an example of an API, using this template you can checkout my Face Recognition API for which I have used a similar template, you can test that put [here](https://github.com/sai-krishna-msk/FaceRecognition-API)
-
-
+To make use of this api in your node applications navigate to [Node Directory](https://github.com/sai-krishna-msk/FaceRecognition-API/tree/master/Web/Node) where necessary instructions are provided 
 
 ## Note
 
 To enable sending an email you need to fill in your credentials, open *app.py* file
 and from line 41 to 46 you need to fill in the information (required to send email), We are using smtp (which is not a standard way automate the process of sending a mail, instead you could use Gmail API)
 so, in most of the cases it wont work with your current email(If it is then your account not so secure) So create a new Gmail account if you feel it's worth it :)
-
-## Any Questions/issues/suggestions Please feel free to DM me [Twitter](https://twitter.com/sk_13579)
